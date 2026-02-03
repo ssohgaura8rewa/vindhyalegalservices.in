@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Vindhya Legal Services</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="logo">Vindhya Legal Services</h1>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="contact-section">
+      <h2>Contact Karein</h2>
+      <p>Form bharein — ya seedha email bhejein: <a href="mailto:info@vindhyalegalservices.in">info@vindhyalegalservices.in</a></p>
+
+      <form id="contactForm" onsubmit="sendMail(event)">
+        <label>
+          Naam
+          <input type="text" id="name" required />
+        </label>
+
+        <label>
+          Email
+          <input type="email" id="email" required />
+        </label>
+
+        <label>
+          Sandesh
+          <textarea id="message" rows="6" required></textarea>
+        </label>
+
+        <button type="submit" class="btn">Send Message</button>
+      </form>
+
+      <p class="note">Form submit karne se aapka default email client khulega (mailto) — agar aap chahen to main aapke liye server-side form setup kar karke de sakta/ti hoon.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>&copy; <span id="year2"></span> Vindhya Legal Services</p>
+      <p><a href="mailto:info@vindhyalegalservices.in">info@vindhyalegalservices.in</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Mailto using form data
+    function sendMail(e) {
+      e.preventDefault();
+      var name = document.getElementById('name').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var message = document.getElementById('message').value.trim();
+
+      if (!name || !email || !message) {
+        alert('Kripya sabhi fields bharein.');
+        return;
+      }
+
+      var subject = encodeURIComponent('Website Contact from ' + name);
+      var body = encodeURIComponent(message + "\n\nNaam: " + name + "\nEmail: " + email);
+
+      // Replace email below with your preferred contact email if needed
+      var mailto = 'mailto:info@vindhyalegalservices.in' + '?subject=' + subject + '&body=' + body;
+      window.location.href = mailto;
+    }
+
+    document.getElementById('year2').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
